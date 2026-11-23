@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "poison_shield_optimizer",
+  "version": "${version}",
+  "name": "Poison's Shield Optimizer",
+  "description": "Client-side shield latency optimizer for PvP, in the style of crystal and anchor optimizers.",
+  "authors": ["Poison"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.poison.shieldoptimizer.PoisonShieldOptimizerClient"],
+    "modmenu": ["com.poison.shieldoptimizer.ModMenuIntegration"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "recommends": {
+    "modmenu": "*"
+  }
+}
