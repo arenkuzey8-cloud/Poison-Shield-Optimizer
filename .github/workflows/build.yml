@@ -2,27 +2,38 @@ name: build
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 25
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 25
+          java-version: '25'
 
-      - uses: gradle/actions/setup-gradle@v4
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: current
 
       - name: Build
+        working-directory: ./poison-shield-optimizer
         run: gradle build --no-daemon
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
           name: poison-shield-optimizer
-          path: build/libs/*.jar
+          path: poison-shield-optimizer/build/libs/*.jar
+          if-no-files-found: error
